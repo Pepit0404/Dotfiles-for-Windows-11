@@ -13,18 +13,21 @@ function Set-VSCode-Configuration {
 choco install -y "vscode" --params "/NoDesktopIcon /NoQuicklaunchIcon /NoContextMenuFiles /NoContextMenuFolders";
 Set-VSCode-Configuration;
 refreshenv;
-code --install-extension "ue.alphabetical-sorter";
+
 code --install-extension "formulahendry.auto-rename-tag";
+code --install-extension "github.copilot";
+code --install-extension "eamodio.gitlens";
+code --install-extension "michaelzhou.fleet-theme";
+code --install-extension "glenn2223.live-sass";
+code --install-extension "yandeu.five-server";
+code --install-extension "gruntfuggly.todo-tree";
+code --install-extension "ms-vscode-remote.remote-ssh";
 code --install-extension "ms-azuretools.vscode-docker";
 code --install-extension "usernamehw.errorlens";
-code --install-extension "eamodio.gitlens";
 code --install-extension "oderwat.indent-rainbow";
 code --install-extension "davidanson.vscode-markdownlint";
 code --install-extension "robole.markdown-snippets";
 code --install-extension "pkief.material-icon-theme";
-code --install-extension "ms-vscode.powershell";
-code --install-extension "esbenp.prettier-vscode";
 code --install-extension "ms-vscode-remote.remote-containers";
 code --install-extension "ms-vscode-remote.remote-wsl";
-code --install-extension "jock.svg";
 code --install-extension "rangav.vscode-thunder-client";

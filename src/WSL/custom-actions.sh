@@ -149,3 +149,11 @@ nestnew() {
 
 ## Initialize Go modules
 alias gmi="go mod init"
+
+################################################################################
+#                                  Own Aliases                                 #
+################################################################################
+
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias lla='ls -la'

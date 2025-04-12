@@ -14,5 +14,15 @@
 		"key": "shift+alt+down",
 		"command": "-editor.action.copyLinesDownAction",
 		"when": "editorTextFocus && !editorReadonly"
-	}
+	},
+	{
+        "key": "alt+enter",
+        "command": "editor.action.autoFix",
+        "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+    },
+    {
+        "key": "shift+alt+oem_period",
+        "command": "-editor.action.autoFix",
+        "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+    }
 ]

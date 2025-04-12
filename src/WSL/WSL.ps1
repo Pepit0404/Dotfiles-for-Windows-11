@@ -33,102 +33,23 @@ function Set-Git-Configuration-In-Ubuntu {
 function Install-VSCode-Extensions-In-WSL {
   Write-Host "Installing Visual Studio Code extensions in WSL:" -ForegroundColor "Green";
 
-  wsl code --install-extension ue.alphabetical-sorter;
-  wsl code --install-extension ms-azuretools.vscode-docker;
-  wsl code --install-extension dbaeumer.vscode-eslint;
-  wsl code --install-extension eamodio.gitlens;
-  wsl code --install-extension golang.go;
-  wsl code --install-extension oderwat.indent-rainbow;
-  wsl code --install-extension ritwickdey.liveserver;
-  wsl code --install-extension davidanson.vscode-markdownlint;
-  wsl code --install-extension esbenp.prettier-vscode;
-  wsl code --install-extension jock.svg;
-  wsl code --install-extension bradlc.vscode-tailwindcss;
-  wsl code --install-extension rangav.vscode-thunder-client;
-}
-
-function Install-Volta-In-Ubuntu {
-  $DotfilesVoltaInstallerPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "volta.sh";
-
-  Invoke-WebRequest -o $DotfilesVoltaInstallerPath https://get.volta.sh;
-
-  $WslVoltaInstallerPath = wsl wslpath $DotfilesVoltaInstallerPath.Replace("\", "\\");
-
-  Write-Host "Installing Volta in Ubuntu:" -ForegroundColor "Green";
-  
-  wsl bash $WslVoltaInstallerPath;
-}
-
-function Install-Nodejs-Packages-In-Ubuntu {
-  Write-Host "Installing Node.js LTS in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install node;
-  
-  Write-Host "Installing NPM in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install npm;
-  
-  Write-Host "Installing Yarn in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install yarn;
-  
-  Write-Host "Installing TypeScript in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install typescript;
-  
-  Write-Host "Installing Yarn-Upgrade-All in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install yarn-upgrade-all;
-  
-  Write-Host "Installing NestJS CLI in Ubuntu:" -ForegroundColor "Green";
-  wsl ~/.volta/bin/volta install @nestjs/cli;
-}
-
-function Install-Golang-In-Ubuntu {
-  Write-Host "Installing Golang in Ubuntu:" -ForegroundColor "Green";
-  wsl sudo apt install --yes --no-install-recommends golang-go;
-}
-
-function Install-Hugo-In-Ubuntu {
-  $HugoReleasesUri = "https://api.github.com/repos/gohugoio/hugo/releases";
-  $DownloadHugo = $FALSE;
-
-  Write-Host "Checking the latest version of Hugo:" -ForegroundColor "Green";
-  $HugoLastVersion = (Invoke-WebRequest $HugoReleasesUri | ConvertFrom-Json)[0].tag_name.Replace("v", "");
-  Write-Host "Latest Hugo version is ${HugoLastVersion}" -ForegroundColor "Green";
-
-  $HugoDownloadUri = "https://github.com/gohugoio/hugo/releases/download/v${HugoLastVersion}/hugo_${HugoLastVersion}_Linux-64bit.deb";
-  Write-Host "Download url is ${HugoDownloadUri}" -ForegroundColor "Green";
-
-  $DotfilesHugoInstallerPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "hugo-installer-${HugoLastVersion}.deb";
-
-  if (-not (wsl hugo version)) {
-    $DownloadHugo = $TRUE;
-    Write-Host "Hugo is not installed in Ubuntu." -ForegroundColor "Green";
-  }
-  else {
-    $InstalledHugoFullVersion = wsl hugo version;
-    $InstalledHugoFullVersion -match "(\d\.[\d]+\.\d)";
-    $InstalledHugoVersion = $Matches[1];
-
-    Write-Host "Installed Hugo version is ${InstalledHugoVersion}." -ForegroundColor "Green";
-
-    if (-not ($InstalledHugoVersion -ge $HugoLastVersion)) {
-      $DownloadHugo = $TRUE;
-      Write-Host "Hugo must be updated." -ForegroundColor "Green";
-    }
-  }
-
-  if ($DownloadHugo) {
-    if (-not (Test-Path $DotfilesHugoInstallerPath)) {
-      Write-Host "Downloading Hugo installer:" -ForegroundColor "Green";
-      Invoke-WebRequest $HugoDownloadUri -O $DotfilesHugoInstallerPath;
-    }
-
-    $WslHugoInstallerPath = wsl wslpath $DotfilesHugoInstallerPath.Replace("\", "\\");
-
-    Write-Host "Installing Hugo in Ubuntu:" -ForegroundColor "Green";
-    wsl sudo dpkg -i $WslHugoInstallerPath;
-    wsl sudo apt install -f $WslHugoInstallerPath;
-  }
-  else {
-    Write-Host "No need to update Hugo in Ubuntu." -ForegroundColor "Green";
-  }
+  wsl code --install-extension "formulahendry.auto-rename-tag";
+  wsl code --install-extension "github.copilot";
+  wsl code --install-extension "eamodio.gitlens";
+  wsl code --install-extension "michaelzhou.fleet-theme";
+  wsl code --install-extension "glenn2223.live-sass";
+  wsl code --install-extension "yandeu.five-server";
+  wsl code --install-extension "gruntfuggly.todo-tree";
+  wsl code --install-extension "ms-vscode-remote.remote-ssh";
+  wsl code --install-extension "ms-azuretools.vscode-docker";
+  wsl code --install-extension "usernamehw.errorlens";
+  wsl code --install-extension "oderwat.indent-rainbow";
+  wsl code --install-extension "davidanson.vscode-markdownlint";
+  wsl code --install-extension "robole.markdown-snippets";
+  wsl code --install-extension "pkief.material-icon-theme";
+  wsl code --install-extension "ms-vscode-remote.remote-containers";
+  wsl code --install-extension "ms-vscode-remote.remote-wsl";
+  wsl code --install-extension "rangav.vscode-thunder-client";
 }
 
 function Install-Plug-Vim-In-Ubuntu {
@@ -256,6 +177,7 @@ Install-Ubuntu-Package -PackageName "zsh";
 Install-Ubuntu-Package -PackageName "make";
 Install-Ubuntu-Package -PackageName "g++";
 Install-Ubuntu-Package -PackageName "gcc";
+Install-Ubuntu-Package -PackageName "apache2";
 
 Set-Git-Configuration-In-Ubuntu;
 
